@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.work.law.module.api.dao.UserDao">
+
+   <insert id="addUser" parameterType="cn.lawuser.entity.UserEntity">
+       upsert into law_user(user_name,password,real_name,phone_number,email,regis_time) values
+       (#{userName},#{password},#{realName},#{phoneNumber},#{email},#{regisTime})
+   </insert>
+
+    <select id="userLogin" resultType="cn.lawuser.entity.UserEntity">
+        select * from law_user
+        <where>
+            <choose>
+                <when test="userEntity.userName!=null">
+                    and user_name=#{userEntity.userName}and password=#{userEntity.password}
+                </when>
+                <otherwise>
+                    and phone_number=#{userEntity.phoneNumber} and password=#{userEntity.password}
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+</mapper>

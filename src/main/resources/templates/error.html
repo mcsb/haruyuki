@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0,user-scale=no" />
+    <link href="/webjars/materializecss/0.96.0/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <title th:text="${status}">状态码</title>
+</head>
+<body>
+<div class="row">
+    <h1 class="indigo-text center" th:text="${error}">错误类型</h1>
+    <p class="col s12 center" th:text="${message}">错误信息</p>
+</div>
+
+</body>
+</html>
