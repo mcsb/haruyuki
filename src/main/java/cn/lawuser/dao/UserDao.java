@@ -11,6 +11,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserDao {
     /**
+     * 根据用户名查找
+     * @param userName
+     * @return
+     */
+    UserEntity findByName(String userName);
+    /**
      * 注册用户
      * @param userEntity
      */

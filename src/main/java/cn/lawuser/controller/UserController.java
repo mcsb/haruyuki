@@ -6,10 +6,7 @@ import cn.lawuser.entity.UserEntity;
 import cn.lawuser.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Generated;
 import javax.servlet.http.HttpSession;
@@ -29,13 +26,23 @@ public class UserController {
         this.userService = userService;
     }
 
+
+
+    @RequestMapping("regisPage")
+    public String displayPage(){
+        return "register";
+    }
     /**
      * 注册
      * @param userEntity
      * @return
      */
-    @PostMapping("register")
-    public AjaxResult userRegister(UserEntity userEntity){
+    @PostMapping("/register")
+    public AjaxResult userRegister(@ModelAttribute(value = "userEntity") UserEntity userEntity){
+        UserEntity user=userService.findByName(userEntity.getUserName());
+        if(user!=null){
+            return new AjaxResult(HttpStatus.BAD_REQUEST,"该用户已存在");
+        }
         String newPwd=MD5Util.MD5Encode(userEntity.getPassword(),"UTF-8");
         userEntity.setPassword(newPwd);
         userEntity.setRegisTime(System.currentTimeMillis());
@@ -48,7 +55,7 @@ public class UserController {
      * @param userEntity
      * @return
      */
-    @PostMapping("login")
+    @PostMapping("/login")
     public AjaxResult userLogin(UserEntity userEntity, HttpSession session){
         String newPwd=MD5Util.MD5Encode((userEntity.getPassword()),"UTF-8");
         userEntity.setPassword(newPwd);
@@ -67,7 +74,7 @@ public class UserController {
 
     }
 
-    @GetMapping("getPass")
+    @GetMapping("/getPass")
     public boolean getpass(HttpSession session){
         UserEntity userEntity= (UserEntity) session.getAttribute("user");
         return userEntity.isPay();

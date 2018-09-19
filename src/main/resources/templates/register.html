@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+
+        <h2>Login</h2>
+
+            <form th:action="@{/api/user/register}" th:object="${userEntity}">
+                <input id="username" type="text" th:field="${userEntity.userName}"/>
+                <label for="username">Username</label>
+
+                <input id="password"  type="text" th:field="${userEntity.password}"/>
+                <label for="password">password</label>
+
+                <input id="realName" type="text" th:field="${userEntity.realName}"/>
+                <label for="realName">realName</label>
+
+                <input id="phoneNumber" type="text" th:field="${userEntity.phoneNumber}"/>
+                <label for="phoneNumber">phoneNumber</label>
+
+                <input id="email" type="text" th:field="${userEntity.email}"/>
+                <label for="email">email</label>
+
+
+                    <button type="submit" name="action">Submit
+                    </button>
+            </form>
+
+</body>
+</html>

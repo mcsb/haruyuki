@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.work.law.module.api.dao.UserDao">
+<mapper namespace="cn.lawuser.dao.UserDao">
 
    <insert id="addUser" parameterType="cn.lawuser.entity.UserEntity">
        upsert into law_user(user_name,password,real_name,phone_number,email,regis_time) values
        (#{userName},#{password},#{realName},#{phoneNumber},#{email},#{regisTime})
    </insert>
+
+    <select id="findByName" parameterType="String" resultType="cn.lawuser.entity.UserEntity">
+        select * from law_user where user_name=#{userName}
+    </select>
 
     <select id="userLogin" resultType="cn.lawuser.entity.UserEntity">
         select * from law_user

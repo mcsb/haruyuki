@@ -9,6 +9,12 @@ import cn.lawuser.entity.UserEntity;
  */
 public interface UserService {
     /**
+     * 根据用户名查找
+     * @param userName
+     * @return
+     */
+    UserEntity findByName(String userName);
+    /**
      * 用户注册
      * @param userEntity
      */
